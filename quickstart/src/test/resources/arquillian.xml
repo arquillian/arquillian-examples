@@ -6,7 +6,7 @@
 
 	<!-- used if JBoss profile is selected and server has not been started before running tests -->
 	<jboss:container>
-		<jbossHome>C:\01-Development\Projekte\jboss-commit\jboss-6.0.0.20100429-M3</jbossHome>
+		<jbossHome>/dev/jboss/jboss-6.0.0.20100429-M3</jbossHome>
 		<!-- <javaHome>/usr/lib/jvm/java-6-openjdk</javaHome> Will default o JAVA_HOME--> 
 		<bindAddress>127.0.0.1</bindAddress>
 		<httpPort>8080</httpPort> <!-- WARN: this is not the bind port, but connect port. Bind port must be set in jboss xml config -->
