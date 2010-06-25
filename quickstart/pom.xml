@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<!-- Parent -->
+    <parent>
+       <groupId>org.jboss.arquillian.sandbox.examples</groupId>
+       <artifactId>arquillian-sandbox-examples-parent</artifactId>
+       <version>1.0.0-SNAPSHOT</version>
+       <relativePath>../pom.xml</relativePath>
+    </parent>
+	
+	<!-- Model Information -->
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- Artifact Information  -->
+    <groupId>org.jboss.arquillian.sandbox.examples</groupId>
+	<artifactId>arquillian-sandbox-examples-quickstart</artifactId>
+	<packaging>war</packaging>
+	<name>Arquillian Sandbox Examples Quickstart</name>
+	<description>Simple Arquillian Quickstart Project</description>
+	
+	<!-- Properties -->
+	<properties>
+		<!--
+			Explicitly declaring the source encoding eliminates the following
+			message: [WARNING] Using platform encoding (UTF-8 actually) to copy
+			filtered resources, i.e. build is platform dependent!
+		-->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!--
+			To set the jboss.home environment variable the Maven way, set the
+			jboss.home property in an active profile in the Maven 2 settings.xml
+			file
+		-->
+		<jboss.home>${env.JBOSS_HOME}</jboss.home>
+		<jboss.domain>default</jboss.domain>
+		<!-- The version of Weld extensions in use -->
+		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
+
+		<arquillian.version>1.0.0.Alpha2</arquillian.version>
+	</properties>
+
+	<!-- repositories configured in settings.xml -->
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Import scope will provide versions for dependencies below. -->
+			<dependency>
+				<groupId>org.jboss.weld</groupId>
+				<artifactId>weld-extensions-bom</artifactId>
+				<version>${weld.extensions.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<!-- CDI (JSR-299) -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- EJB -->
+		<dependency>
+			<groupId>org.jboss.ejb3</groupId>
+			<artifactId>jboss-ejb3-api</artifactId>
+			<scope>provided</scope>
+			<version>3.1.0</version>
+		</dependency>
+		<!--
+			Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated,
+			@Resource)
+		-->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Bean Validation (JSR-303) -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Bean Validation Implementation -->
+		<!--
+			Provides portable constraints such as @NotEmpty, @Email and @Url
+		-->
+		<!--
+			Hibernate Validator is only the JSR-303 implementation at the moment,
+			so we can assume it's provided
+		-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- JSF -->
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- JPA -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--
+			Optional, but highly recommended. <dependency>
+			<groupId>org.testng</groupId> <artifactId>testng</artifactId>
+			<version>5.10</version> <scope>test</scope>
+			<classifier>jdk15</classifier> </dependency>
+		-->
+
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Needed on JBoss AS as EL is out of date -->
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<scope>runtime</scope>
+			<!-- FIXME this version should be in the Weld API BOM -->
+			<version>2.1.2-b04</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.el</groupId>
+					<artifactId>el-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Arquillian -->
+		<dependency>
+			<groupId>org.jboss.arquillian</groupId>
+			<artifactId>arquillian-junit</artifactId>
+			<version>${arquillian.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	<!--
+		<dependency> <groupId>org.jboss.spec</groupId>
+		<artifactId>jboss-javaee-6.0</artifactId>
+		<version>1.0.0.Beta4</version> <type>pom</type>
+		<scope>provided</scope> </dependency>
+	-->
+	
+	<dependency>
+      	<groupId>javax.transaction</groupId>
+      	<artifactId>jta</artifactId>
+      	<scope>provided</scope>
+      	<version>1.1</version>
+      </dependency>
+		
+
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<!-- Eclipse plugin can force download of source and JavaDoc jars -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+					<!--
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+					-->
+				</configuration>
+			</plugin>
+
+			<!-- Configure the JBoss AS Maven deploy plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jboss-maven-plugin</artifactId>
+				<configuration>
+					<jbossHome>${jboss.home}</jbossHome>
+					<serverName>${jboss.domain}</serverName>
+					<fileNames>
+						<fileName>${project.build.directory}/${project.build.finalName}.war
+						</fileName>
+					</fileNames>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>weld-embedded</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-weld-embedded</artifactId>
+					<version>${arquillian.version}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>jbossas-remote-60</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-jbossas-remote-60</artifactId>
+					<version>${arquillian.version}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<testResources>
+					<testResource>
+						<directory>src/test/resources</directory>
+					</testResource>
+					<testResource>
+						<directory>src/test/resources-jboss</directory>
+					</testResource>
+				</testResources>
+			</build>
+		</profile>
+		<!-- recommended to start with this one -->
+		<profile>
+			<id>jbossas-local-60</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-jbossas-local-60</artifactId>
+					<version>${arquillian.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-server-manager</artifactId>
+					<version>1.0.3.GA</version>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-as-client</artifactId>
+					<version>6.0.0.20100429-M3</version>
+					<type>pom</type>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+</project>

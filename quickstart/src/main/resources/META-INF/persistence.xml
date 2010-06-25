@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+   xmlns="http://java.sun.com/xml/ns/persistence" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+      http://java.sun.com/xml/ns/persistence
+      http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+   <persistence-unit name="widgets">
+      <!-- You can force a non-default JPA provider using one of these declarations -->
+      <!--
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      -->
+
+      <!-- Use this data source name for JBoss AS -->
+      <jta-data-source>java:/DefaultDS</jta-data-source>
+      <!-- Use this data source name for Glassfish -->
+      <!--
+      <jta-data-source>jdbc/__default</jta-data-source>
+      -->
+      <properties>
+         <!-- Properties for Hibernate (default provider for JBoss AS) -->
+         <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+         <property name="hibernate.show_sql" value="true"/>
+         <property name="hibernate.transaction.flush_before_completion" value="true"/>
+         <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+
+         <!-- Properties for EclipseLink (default provider for GlassFish) -->
+         <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+         <property name="eclipselink.logging.level" value="FINE"/>
+
+      </properties>
+   </persistence-unit>
+</persistence>
