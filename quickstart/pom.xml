@@ -265,6 +265,8 @@
 			</dependencies>
 		</profile>
 		
+        <!-- java.lang.NoClassDefFoundError: javax/servlet/http/HttpServlet
+        https://jira.jboss.org/browse/ARQ-205-->
 		<profile>
 			<id>jbossas-managed-51</id>
 			<dependencies>
