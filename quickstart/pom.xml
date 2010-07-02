@@ -38,7 +38,8 @@
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
 
-		<arquillian.version>1.0.0.Alpha2</arquillian.version>
+<!--		<arquillian.version>1.0.0.Alpha2</arquillian.version>-->
+		<arquillian.version>1.0.0-SNAPSHOT</arquillian.version>
 	</properties>
 
 	<!-- repositories configured in settings.xml -->
@@ -243,11 +244,11 @@
 		</profile>
 		<!-- recommended to start with this one -->
 		<profile>
-			<id>jbossas-local-60</id>
+			<id>jbossas-managed-6</id>
 			<dependencies>
 				<dependency>
 					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-jbossas-local-60</artifactId>
+					<artifactId>arquillian-jbossas-managed-6</artifactId>
 					<version>${arquillian.version}</version>
 				</dependency>
 				<dependency>
@@ -260,6 +261,17 @@
 					<artifactId>jboss-as-client</artifactId>
 					<version>6.0.0.20100429-M3</version>
 					<type>pom</type>
+				</dependency>
+			</dependencies>
+		</profile>
+		
+		<profile>
+			<id>jbossas-managed-51</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-jbossas-managed-5.1</artifactId>
+					<version>${arquillian.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>

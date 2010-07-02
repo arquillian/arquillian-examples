@@ -9,7 +9,7 @@
  1) download JBoss6M3 (http://sourceforge.net/projects/jboss/files/JBoss/JBoss-6.0.0.M3)
  2) configure JBoss Maven repo in settings.xml (http://community.jboss.org/wiki/MavenGettingStarted)
  3) configure JBoss home within arquillian.xml (or set JBOSS_HOME environment variable, alternatively)
- 4) run: mvn clean install -Pjbossas-local-60
+ 4) run: mvn clean install -Pjbossas-managed-6
  
  Tests will be executed within container. Container can either be started manually or automatically by Arquillian.
  
