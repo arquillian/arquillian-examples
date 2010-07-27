@@ -1,16 +1,15 @@
 package org.jboss.arquillian.sandbox.examples.quickstart;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import junit.framework.Assert;
 
 import org.jboss.arquillian.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.sandbox.examples.quickstart.HelloEJB;
-import org.jboss.arquillian.sandbox.examples.quickstart.HelloEJBBean;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.impl.base.asset.ByteArrayAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,24 +21,46 @@ public class HelloEJBContainerTest {
 	private static ByteArrayAsset EMPTY_BEANS_XML = new ByteArrayAsset(
 			"<beans/>".getBytes());
 
-	// @Inject currently not working due to bug in JBoss6M3.
-	@EJB
+	/**
+	 * TODO Works for Glassfish at the moment, JBoss settings see comments.
+	 */
+	@Inject
 	private HelloEJB helloEJB;
 
 	@Deployment
-	public static JavaArchive createTestArchive() {
-		JavaArchive arch = ShrinkWrap.create("helloEJB.jar", JavaArchive.class)
+	public static WebArchive createTestArchive() {
+
+		JavaArchive arch = ShrinkWrap.create(JavaArchive.class, "helloEJB.jar")
 				.addClasses(HelloEJB.class, HelloEJBBean.class)
 				.addManifestResource(EMPTY_BEANS_XML, "beans.xml");
 
-		System.out.println("### building " + arch.getName());
+		WebArchive webArchive = ShrinkWrap.create(WebArchive.class,
+				"test99.war").setWebXML("glassfish-remote-3/test-web.xml").addLibrary(arch);
 
-		return arch;
+		return webArchive;
 	}
+
+	/**
+	 * JBossAS6 config
+	 */
+	// @Inject currently not working due to bug in JBoss6M3.
+	// @EJB
+	// private HelloEJB helloEJB;
+	//
+	// @Deployment
+	// public static JavaArchive createTestArchive() {
+	// JavaArchive arch = ShrinkWrap.create("helloEJB.jar", JavaArchive.class)
+	// .addClasses(HelloEJB.class, HelloEJBBean.class)
+	// .addManifestResource(EMPTY_BEANS_XML, "beans.xml");
+	//
+	// System.out.println("### building " + arch.getName());
+	//
+	// return arch;
+	// }
 
 	@Test
 	public void testHelloEJB() {
-		System.out.println("### testSayHello");
+		System.out.println("### testSayHelloEJB");
 		String result = helloEJB.sayHelloEJB("Simon");
 		Assert.assertEquals("Hello Simon", result);
 	}

@@ -11,6 +11,10 @@
  3) configure JBoss home within arquillian.xml (or set JBOSS_HOME environment variable, alternatively)
  4) run: mvn clean install -Pjbossas-managed-6
  
+ Using other server profiles:
+ * mvn clean install -Pglassfish-remote-3
+ 
+ 
  Tests will be executed within container. Container can either be started manually or automatically by Arquillian.
  
  All about arquillian: http://jboss.org/arquillian

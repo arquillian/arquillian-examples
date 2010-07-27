@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
+
 	<!-- Parent -->
-    <parent>
-       <groupId>org.jboss.arquillian.sandbox.examples</groupId>
-       <artifactId>arquillian-sandbox-examples-parent</artifactId>
-       <version>1.0.0-SNAPSHOT</version>
-       <relativePath>../pom.xml</relativePath>
-    </parent>
-	
+	<parent>
+		<groupId>org.jboss.arquillian.sandbox.examples</groupId>
+		<artifactId>arquillian-sandbox-examples-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<!-- Model Information -->
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<!-- Artifact Information  -->
-    <groupId>org.jboss.arquillian.sandbox.examples</groupId>
+	<groupId>org.jboss.arquillian.sandbox.examples</groupId>
 	<artifactId>arquillian-sandbox-examples-quickstart</artifactId>
 	<packaging>war</packaging>
 	<name>Arquillian Sandbox Examples Quickstart</name>
 	<description>Simple Arquillian Quickstart Project</description>
-	
+
 	<!-- Properties -->
 	<properties>
 		<!--
@@ -38,7 +38,7 @@
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
 
-<!--		<arquillian.version>1.0.0.Alpha2</arquillian.version>-->
+		<!--		<arquillian.version>1.0.0.Alpha2</arquillian.version>-->
 		<arquillian.version>1.0.0-SNAPSHOT</arquillian.version>
 	</properties>
 
@@ -150,20 +150,20 @@
 			<scope>test</scope>
 		</dependency>
 
-	<!--
-		<dependency> <groupId>org.jboss.spec</groupId>
-		<artifactId>jboss-javaee-6.0</artifactId>
-		<version>1.0.0.Beta4</version> <type>pom</type>
-		<scope>provided</scope> </dependency>
-	-->
-	
-	<dependency>
-      	<groupId>javax.transaction</groupId>
-      	<artifactId>jta</artifactId>
-      	<scope>provided</scope>
-      	<version>1.1</version>
-      </dependency>
-		
+		<!--
+			<dependency> <groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Beta4</version> <type>pom</type>
+			<scope>provided</scope> </dependency>
+		-->
+
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<scope>provided</scope>
+			<version>1.1</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -264,9 +264,11 @@
 				</dependency>
 			</dependencies>
 		</profile>
-		
-        <!-- java.lang.NoClassDefFoundError: javax/servlet/http/HttpServlet
-        https://jira.jboss.org/browse/ARQ-205-->
+
+		<!--
+			java.lang.NoClassDefFoundError: javax/servlet/http/HttpServlet
+			https://jira.jboss.org/browse/ARQ-205
+		-->
 		<profile>
 			<id>jbossas-managed-51</id>
 			<dependencies>
@@ -274,6 +276,42 @@
 					<groupId>org.jboss.arquillian.container</groupId>
 					<artifactId>arquillian-jbossas-managed-5.1</artifactId>
 					<version>${arquillian.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>glassfish-remote-3</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-glassfish-remote-3</artifactId>
+					<version>1.0.0-SNAPSHOT</version>
+					<!--					<version>1.0.0.Alpha3</version>-->
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.deployment</groupId>
+					<artifactId>deployment-client</artifactId>
+					<version>3.0.1-b19</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>glassfish-embedded-3</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-glassfish-embedded-3</artifactId>
+					<!--					<version>1.0.0.Alpha3</version>-->
+					<version>1.0.0-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.extras</groupId>
+					<artifactId>glassfish-embedded-all</artifactId>
+					<version>3.0.1-b02</version>
 				</dependency>
 			</dependencies>
 		</profile>
