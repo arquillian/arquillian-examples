@@ -6,5 +6,5 @@
       http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
    <!-- JSR-88 derives the name of the distributed archive from the module-name element -->
-   <module-name>test99</module-name>
+   <module-name>test</module-name>
 </web-app>

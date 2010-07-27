@@ -1,6 +1,6 @@
 package org.jboss.arquillian.sandbox.examples.quickstart;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 
 import junit.framework.Assert;
 
@@ -24,7 +24,8 @@ public class HelloEJBContainerTest {
 	/**
 	 * TODO Works for Glassfish at the moment, JBoss settings see comments.
 	 */
-	@Inject
+	//@Inject works as well --> CDI injection
+	@EJB
 	private HelloEJB helloEJB;
 
 	@Deployment
@@ -34,8 +35,8 @@ public class HelloEJBContainerTest {
 				.addClasses(HelloEJB.class, HelloEJBBean.class)
 				.addManifestResource(EMPTY_BEANS_XML, "beans.xml");
 
-		WebArchive webArchive = ShrinkWrap.create(WebArchive.class,
-				"test99.war").setWebXML("glassfish-remote-3/test-web.xml").addLibrary(arch);
+		WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
+				.setWebXML("glassfish-remote-3/test-web.xml").addLibrary(arch);
 
 		return webArchive;
 	}
@@ -44,19 +45,19 @@ public class HelloEJBContainerTest {
 	 * JBossAS6 config
 	 */
 	// @Inject currently not working due to bug in JBoss6M3.
-	// @EJB
-	// private HelloEJB helloEJB;
-	//
-	// @Deployment
-	// public static JavaArchive createTestArchive() {
-	// JavaArchive arch = ShrinkWrap.create("helloEJB.jar", JavaArchive.class)
-	// .addClasses(HelloEJB.class, HelloEJBBean.class)
-	// .addManifestResource(EMPTY_BEANS_XML, "beans.xml");
-	//
-	// System.out.println("### building " + arch.getName());
-	//
-	// return arch;
-	// }
+//	 @EJB
+//	 private HelloEJB helloEJB;
+//	
+//	 @Deployment
+//	 public static JavaArchive createTestArchive() {
+//	 JavaArchive arch = ShrinkWrap.create(JavaArchive.class, "helloEJB.jar")
+//	 .addClasses(HelloEJB.class, HelloEJBBean.class)
+//	 .addManifestResource(EMPTY_BEANS_XML, "beans.xml");
+//	
+//	 System.out.println("### building " + arch.getName());
+//	
+//	 return arch;
+//	 }
 
 	@Test
 	public void testHelloEJB() {
