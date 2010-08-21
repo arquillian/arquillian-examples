@@ -1,4 +1,6 @@
-package org.jboss.arquillian.sandbox.examples;
+package org.jboss.arquillian.examples;
+
+import org.jboss.arquillian.examples.WidgetRepository;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -12,7 +14,8 @@ public class WidgetRepositoryProducer
    // NOTE cannot use producer field because Weld attempts to close EntityManager
    @PersistenceContext EntityManager em;
 
-   public @Produces @WidgetRepository EntityManager retrieveEntityManager() {
+   public @Produces @WidgetRepository
+   EntityManager retrieveEntityManager() {
       return em;
    }
 

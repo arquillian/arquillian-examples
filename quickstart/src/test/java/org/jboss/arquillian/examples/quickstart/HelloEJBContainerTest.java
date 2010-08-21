@@ -1,10 +1,12 @@
-package org.jboss.arquillian.sandbox.examples.quickstart;
+package org.jboss.arquillian.examples.quickstart;
 
 import javax.ejb.EJB;
 
 import junit.framework.Assert;
 
 import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.examples.quickstart.HelloEJB;
+import org.jboss.arquillian.examples.quickstart.HelloEJBBean;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;

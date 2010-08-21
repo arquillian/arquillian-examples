@@ -1,4 +1,4 @@
-package org.jboss.arquillian.sandbox.examples;
+package org.jboss.arquillian.examples;
 
 import java.io.Serializable;
 

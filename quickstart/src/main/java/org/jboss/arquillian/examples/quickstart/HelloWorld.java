@@ -1,4 +1,4 @@
-package org.jboss.arquillian.sandbox.examples.quickstart;
+package org.jboss.arquillian.examples.quickstart;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;

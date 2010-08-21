@@ -8,5 +8,5 @@
  Quickstart
  ==========
  
- This is a simple startup project with contains both tests for POJO and EJB.
+ This is a simple startup project with contains both tests for POJO and EJB running against a variety of containers.
  

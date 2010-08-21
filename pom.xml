@@ -6,12 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<!-- Artifact Information  -->
-    <groupId>org.jboss.arquillian.sandbox.examples</groupId>
-	<artifactId>arquillian-sandbox-examples-parent</artifactId>
+    <groupId>org.jboss.arquillian.examples</groupId>
+	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<name>Arquillian Sandbox Examples Aggregator</name>
+	<name>Arquillian Examples Aggregator</name>
 	<version>1.0.0-SNAPSHOT</version>
-	<description>Arquillian Sandbox Examples Aggregator</description>
+	<description>Arquillian Examples Aggregator</description>
 
 	<!-- Aggregate Modules -->
 	<modules>

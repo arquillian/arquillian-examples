@@ -1,4 +1,6 @@
-package org.jboss.arquillian.sandbox.examples;
+package org.jboss.arquillian.examples;
+
+import org.jboss.arquillian.examples.Widget;
 
 import java.util.List;
 
@@ -10,7 +12,8 @@ import javax.persistence.EntityManager;
 
 public class WidgetListProducer
 {
-   @Inject @WidgetRepository EntityManager widgetRepository;
+   @Inject @WidgetRepository
+   EntityManager widgetRepository;
    
    @Produces
    @Named
