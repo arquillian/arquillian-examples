@@ -16,6 +16,7 @@
 	<!-- Aggregate Modules -->
 	<modules>
 		<module>quickstart</module>
+		<module>ejb31-gfembedded</module>
 	</modules>
 
 </project>
