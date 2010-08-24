@@ -18,7 +18,7 @@
 		<module>quickstart</module>
 		<module>ejb31-gfembedded</module>
 		<module>ejb31-jbembedded</module>
-		<!--<module>ejb3-openejb</module>-->
+		<module>ejb3-openejb</module>
 	</modules>
 
 </project>
