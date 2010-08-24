@@ -12,6 +12,18 @@
  This project contains EJB3.1 integration test and runs against Glassfish Embedded 3 container. The projects target is to provide simplest possible setup for this test
  combination.
 
+ 
+ ejb31-jbembedded
+ ================
+ This project contains EJB3.1 integration test and runs against JBoss AS 6 Embedded container. The projects target is to provide simplest possible setup for this test
+ combination.
+ 
+ 
+ ejb3-openejb
+ ============
+ This project contains EJB3 integration test and runs against Apache OpenEJB 3.1 Embedded container. The projects target is to provide simplest possible setup for this test
+ combination.
+ 
  quickstart
  ==========
  This is a simple startup project with contains both tests for POJO and EJB running against a variety of containers.

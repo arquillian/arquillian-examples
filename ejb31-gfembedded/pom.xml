@@ -16,8 +16,8 @@
 	<!-- Artifact Information  -->
 	<groupId>org.jboss.arquillian.examples</groupId>
 	<artifactId>ejb31-gfembedded</artifactId>
-	<name>Arquillian Examples EJB3.1 Glassfish Embedded</name>
-	<description>Simple Arquillian EJB3.1 Glassfish Embedded Project</description>
+	<name>Arquillian Examples EJB3.1 Glassfish Embedded 3</name>
+	<description>Simple Arquillian EJB3.1 Glassfish Embedded 3 Project</description>
 
     <!-- Properties -->
     <properties>

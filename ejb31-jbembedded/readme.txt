@@ -1,11 +1,11 @@
 
-                                 ejb31-gfembedded
-								 
+                                 ejb3-jbembedded
+
  Arquillian enables you to test your business logic in a remote or embedded container. Alternatively, it can deploy an archive to the container so the test can interact as a remote client.
  
  All about arquillian: http://jboss.org/arquillian
  
- Example contains EJB3.1 integration test and runs against Glassfish Embedded 3 container. The projects target is to provide simplest possible setup for this test combination.
+ Example contains EJB3.1 integration test and runs against JBoss AS 6 Embedded container. The projects target is to provide simplest possible setup for this test combination.
 
  Getting started
  ================ 
