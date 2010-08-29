@@ -52,8 +52,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- TODO Is required. Otherwise causes: java.lang.NoClassDefFoundError: javax/inject/Inject
-      at org.jboss.arquillian.container.openejb.embedded_3_1.OpenEJBTestEnricher.enrich(OpenEJBTestEnricher.java:64) -->
+        <!-- TODO This should not be required. https://jira.jboss.org/browse/ARQ-157 -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
