@@ -29,9 +29,7 @@ public class Game implements Serializable
    private Long id;
    private String title;
 
-   public Game()
-   {
-   }
+   public Game() {}
 
    public Game(String title)
    {
@@ -62,7 +60,8 @@ public class Game implements Serializable
    }
 
    @Override
-   public String toString() {
+   public String toString()
+   {
       return "Game@" + hashCode() + "[id = " + id + "; title = " + title + "]";
    }
 }
