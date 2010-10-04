@@ -17,7 +17,6 @@
 package com.acme.jpa;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -41,13 +40,6 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class GamePersistenceTestCase
 {
-   private static final String[] GAME_TITLES =
-   {
-      "Super Mario Brothers",
-      "Mario Kart",
-      "F-Zero"
-   };
-
    @Deployment
    public static Archive<?> createDeployment()
    {
@@ -56,6 +48,13 @@ public class GamePersistenceTestCase
             .addManifestResource("test-persistence.xml", "persistence.xml")
             .addWebResource(EmptyAsset.INSTANCE, "beans.xml");
    }
+ 
+   private static final String[] GAME_TITLES =
+   {
+      "Super Mario Brothers",
+      "Mario Kart",
+      "F-Zero"
+   };
    
    @PersistenceContext
    EntityManager em;
@@ -63,61 +62,77 @@ public class GamePersistenceTestCase
    @Inject
    UserTransaction utx;
 
-   @Test
-   public void testInsert() throws Exception
+   public void insertSampleRecords() throws Exception
    {
-      assertNotNull(utx);
-
-      // flushing database
+      // clear database
       utx.begin();
       em.joinTransaction();
+    
+      System.out.println("Clearing the database...");
       em.createQuery("delete from Game").executeUpdate();
-      utx.commit();
-
+    
       // insert records
-      utx.begin();
-      em.joinTransaction();
       System.out.println("Inserting records...");
       for (String title : GAME_TITLES)
       {
          Game game = new Game(title);
          em.persist(game);
       }
-      utx.commit();
-
-      List<Game> games;
-
-      // query with JPQL
-      utx.begin();
-      em.joinTransaction();
-      System.out.println("Selecting (using JPQL)...");
-      games = em.createQuery("select g from Game g order by g.id", Game.class).getResultList();
-      System.out.println("Found " + games.size() + " games (using JPQL)");
-      assertEquals(GAME_TITLES.length, games.size());
-      for (int i = 0; i < GAME_TITLES.length; i++) {
-         assertEquals(GAME_TITLES[i], games.get(i).getTitle());
-         System.out.println(games.get(i));
-      }
-      utx.commit();
-
-      // query with Criteria
-      utx.begin();
-      em.joinTransaction();
-      CriteriaBuilder builder = em.getCriteriaBuilder();
-      CriteriaQuery<Game> criteria = builder.createQuery(Game.class);
-
-      Root<Game> game = criteria.from(Game.class);
-      criteria.select(game);
-      criteria.orderBy(builder.asc(game.get(Game_.id)));
-      System.out.println("Selecting (using Criteria)...");
-      games = em.createQuery(criteria).getResultList();
-      System.out.println("Found " + games.size() + " games (using Criteria)");
-      assertEquals(GAME_TITLES.length, games.size());
-      for (int i = 0; i < GAME_TITLES.length; i++) {
-         assertEquals(GAME_TITLES[i], games.get(i).getTitle());
-         System.out.println(games.get(i));
-      }
+    
       utx.commit();
    }
-
+   
+   @Test
+   public void should_be_able_to_select_games_using_jpql() throws Exception
+   {
+      insertSampleRecords();
+      
+      utx.begin();
+      em.joinTransaction();
+    
+      System.out.println("Selecting (using JPQL)...");
+      List<Game> games =
+         em.createQuery("select g from Game g order by g.id", Game.class)
+         .getResultList();
+      System.out.println("Found " + games.size() + " games (using JPQL)");
+      assertEquals(GAME_TITLES.length, games.size());
+    
+      for (int i = 0; i < GAME_TITLES.length; i++) {
+         assertEquals(GAME_TITLES[i], games.get(i).getTitle());
+         System.out.println(games.get(i));
+      }
+    
+      utx.commit();
+   }
+   
+   @Test
+   public void should_be_able_to_select_games_using_criteria_api() throws Exception
+   {
+      insertSampleRecords();
+      
+      utx.begin();
+      em.joinTransaction();
+    
+      CriteriaBuilder builder = em.getCriteriaBuilder();
+      CriteriaQuery<Game> criteria = builder.createQuery(Game.class);
+      // FROM clause
+      Root<Game> game = criteria.from(Game.class);
+      // SELECT clause
+      criteria.select(game);
+      // ORDER BY clause
+      criteria.orderBy(builder.asc(game.get(Game_.id)));
+      // No WHERE clause, select all
+    
+      System.out.println("Selecting (using Criteria)...");
+      List<Game> games = em.createQuery(criteria).getResultList();
+      System.out.println("Found " + games.size() + " games (using Criteria)");
+      assertEquals(GAME_TITLES.length, games.size());
+    
+      for (int i = 0; i < GAME_TITLES.length; i++) {
+         assertEquals(GAME_TITLES[i], games.get(i).getTitle());
+         System.out.println(games.get(i));
+      }
+    
+      utx.commit();
+   }
 }
