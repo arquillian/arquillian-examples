@@ -29,3 +29,7 @@
  ==========
  This is a simple startup project with contains both tests for POJO and EJB running against a variety of containers.
  
+
+ jpa2
+ ====
+ This project contains a JPA 2 integration test that runs against Embedded GlassFish (default), Remote GlassFish, Managed JBoss AS and Remote JBoss AS.
