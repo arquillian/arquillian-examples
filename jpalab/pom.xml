@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>org.jboss.arquillian.examples</groupId>
+   <artifactId>jpalab</artifactId>
+   <version>1.0.0</version>
+   <packaging>jar</packaging>
+   <name>Arquillian Examples: JPA Lab</name>
+   <description>A self-contained Arquillian project for studying JPA persistence contexts</description>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+      <arquillian.version>1.0.0.Alpha4</arquillian.version>
+   </properties>
+
+   <repositories>
+      <repository>
+         <id>jboss-public-repository</id>
+         <name>JBoss Repository</name>
+         <url>http://repository.jboss.org/nexus/content/groups/public</url>
+         <releases>
+            <updatePolicy>never</updatePolicy>
+         </releases>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+      </repository>
+      <repository>
+        <id>eclipselink-repo</id>
+        <name>EclipseLink Repository</name>
+        <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+      </repository>
+   </repositories>
+
+   <pluginRepositories>
+      <pluginRepository>
+         <id>jboss-public-repository</id>
+         <name>JBoss Repository</name>
+         <url>http://repository.jboss.org/nexus/content/groups/public</url>
+         <releases>
+            <updatePolicy>never</updatePolicy>
+         </releases>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+      </pluginRepository>
+   </pluginRepositories>
+
+   <dependencies>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.8.1</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.jboss.arquillian</groupId>
+         <artifactId>arquillian-junit</artifactId>
+         <version>${arquillian.version}</version>
+      </dependency>
+
+   </dependencies>
+
+   <build>
+      <defaultGoal>test</defaultGoal>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.1</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-eclipse-plugin</artifactId>
+            <version>2.8</version>
+            <configuration>
+               <wtpversion>2.0</wtpversion>
+            </configuration>
+         </plugin>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <!-- version 2.5 creates seperate test suites per class -->
+            <version>2.4.3</version>
+            <configuration>
+               <includes>
+                  <include>**/*TestCase.java</include>
+               </includes>
+               <systemProperties>
+                  <property>
+                     <name>derby.stream.error.file</name>
+                     <value>target/derby.log</value>
+                  </property>
+               </systemProperties>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>arq-openejb-embedded-openjpa</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.arquillian.container</groupId>
+               <artifactId>arquillian-openejb-embedded-3.1</artifactId>
+               <version>${arquillian.version}</version>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.openejb</groupId>
+               <artifactId>openejb-core</artifactId>
+               <version>3.1.2</version>
+            </dependency>
+            <dependency>
+               <groupId>javax.inject</groupId>
+               <artifactId>javax.inject</artifactId>
+               <version>1</version>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-shared</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-openjpa</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+
+      <profile>
+         <id>arq-openejb-embedded-hibernate</id>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.arquillian.container</groupId>
+               <artifactId>arquillian-openejb-embedded-3.1</artifactId>
+               <version>${arquillian.version}</version>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.openejb</groupId>
+               <artifactId>openejb-core</artifactId>
+               <version>3.1.2</version>
+               <exclusions>
+                  <exclusion>
+                     <groupId>org.apache.openjpa</groupId>
+                     <artifactId>openjpa</artifactId>
+                  </exclusion>
+               </exclusions>
+            </dependency>
+            <dependency>
+               <groupId>javax.inject</groupId>
+               <artifactId>javax.inject</artifactId>
+               <version>1</version>
+            </dependency>
+            <dependency>
+               <groupId>org.hibernate</groupId>
+               <artifactId>hibernate-entitymanager</artifactId>
+               <version>3.4.0.GA</version>
+               <scope>test</scope>
+               <exclusions>
+                  <exclusion>
+                     <groupId>javax.persistence</groupId>
+                     <artifactId>persistence-api</artifactId>
+                  </exclusion>
+                  <exclusion>
+                     <groupId>javax.transaction</groupId>
+                     <artifactId>jta</artifactId>
+                  </exclusion>
+               </exclusions>
+            </dependency>
+            <dependency>
+               <groupId>org.slf4j</groupId>
+               <artifactId>slf4j-jdk14</artifactId>
+               <version>1.4.2</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-shared</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-hibernate</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+
+      <profile>
+         <id>arq-openejb-embedded-eclipselink</id>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.arquillian.container</groupId>
+               <artifactId>arquillian-openejb-embedded-3.1</artifactId>
+               <version>${arquillian.version}</version>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.openejb</groupId>
+               <artifactId>openejb-core</artifactId>
+               <version>3.1.2</version>
+               <exclusions>
+                 <exclusion>
+                   <groupId>org.apache.openjpa</groupId>
+                   <artifactId>openjpa</artifactId>
+                 </exclusion>
+               </exclusions>
+            </dependency>
+            <dependency>
+               <groupId>javax.inject</groupId>
+               <artifactId>javax.inject</artifactId>
+               <version>1</version>
+            </dependency>
+            <dependency>
+               <groupId>org.eclipse.persistence</groupId>
+               <artifactId>eclipselink</artifactId>
+               <version>1.1.2</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-shared</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-openejb-embedded-eclipselink</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+
+      <profile>
+         <id>arq-glassfish-embedded</id>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.arquillian.container</groupId>
+               <artifactId>arquillian-glassfish-embedded-3</artifactId>
+               <version>${arquillian.version}</version>
+            </dependency>
+            <dependency>
+               <groupId>org.glassfish.extras</groupId>
+               <artifactId>glassfish-embedded-all</artifactId>
+               <version>3.0.1</version>
+            </dependency>
+            <!-- To use EclipseLink, comment out Hibernate EntityManager dependency below and
+                 <provider> element in src/test/resources-glassfish-embedded/test-persistence.xml -->
+            <dependency>
+               <groupId>org.hibernate</groupId>
+               <artifactId>hibernate-entitymanager</artifactId>
+               <version>3.5.2-Final</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-glassfish-embedded</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+
+   </profiles>
+</project>

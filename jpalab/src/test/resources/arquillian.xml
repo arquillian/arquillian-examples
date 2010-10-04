@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.com/arquillian"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:glassfish-embedded="urn:arq:org.jboss.arquillian.container.glassfish.embedded_3">
+
+   <!-- Uncomment to have test archives exported to the file system for inspection -->
+   <!--
+   <engine>
+      <deploymentExportPath>target/</deploymentExportPath>
+   </engine>
+   -->
+
+   <glassfish-embedded:container>
+      <glassfish-embedded:sunResourcesXml>src/test/resources-glassfish-embedded/sun-resources.xml</glassfish-embedded:sunResourcesXml>
+   </glassfish-embedded:container>  
+
+</arquillian>

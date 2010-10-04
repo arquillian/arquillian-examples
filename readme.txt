@@ -33,3 +33,8 @@
  jpa2
  ====
  This project contains a JPA 2 integration test that runs against Embedded GlassFish (default), Remote GlassFish, Managed JBoss AS and Remote JBoss AS.
+
+ jpalab
+ ======
+ This project is a JPA 1.x lab that experiments with functionality and boundaries of transaction-scoped and extended persistence contexts. It can be run on the OpenEJB 3.1
+ Embedded container with either OpenJPA, Hibernate or EclipseLink as the JPA provider.
