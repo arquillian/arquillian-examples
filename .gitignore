@@ -1,5 +1,6 @@
 .classpath
 .factorypath
+.gradle/
 .project
 .settings/
 target/
