@@ -1,0 +1,88 @@
+apply plugin: JavaPlugin
+
+buildDir = 'target/gradle-build'
+
+libraryVersions = [
+   junit: '4.8.1', hamcrest: '1.2', arquillian: '1.0.0.Alpha4', slf4j: '1.4.2', openejb: '3.1.2'
+]
+
+repositories {
+   mavenCentral()
+   // enable if you want to use snapshots published locally
+   //mavenRepo urls: 'file://' + System.getProperty('user.home') + '/.m2/repository'
+   mavenRepo urls: 'http://repository.jboss.org/nexus/content/groups/public'
+   mavenRepo urls: 'http://www.eclipse.org/downloads/download.php?r=1&nf=1&file=/rt/eclipselink/maven.repo'
+}
+
+configurations {
+   compileOnly
+   openEjbEmbeddedOpenjpaTestRuntime { extendsFrom testRuntime }
+   openEjbEmbeddedHibernateTestRuntime { extendsFrom testRuntime }
+   openEjbEmbeddedEclipselinkTestRuntime { extendsFrom testRuntime }
+}
+
+dependencies {
+   compileOnly group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+   compileOnly group: 'javax.ejb', name: 'ejb-api', version: '3.0'
+
+   testCompile group: 'junit', name: 'junit', version: libraryVersions.junit
+   testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: libraryVersions.hamcrest
+   testCompile group: 'org.jboss.arquillian', name: 'arquillian-junit', version: libraryVersions.arquillian
+
+   openEjbEmbeddedOpenjpaTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-openejb-embedded-3.1', version: libraryVersions.arquillian
+   openEjbEmbeddedOpenjpaTestRuntime group: 'org.apache.openejb', name: 'openejb-core', version: libraryVersions.openejb
+   openEjbEmbeddedOpenjpaTestRuntime group: 'javax.inject', name: 'javax.inject', version: '1'
+
+   openEjbEmbeddedHibernateTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-openejb-embedded-3.1', version: libraryVersions.arquillian
+   openEjbEmbeddedHibernateTestRuntime(group: 'org.apache.openejb', name: 'openejb-core', version: libraryVersions.openejb) {
+      exclude group: 'org.apache.openjpa', name: 'openjpa'
+   }
+   openEjbEmbeddedHibernateTestRuntime group: 'javax.inject', name: 'javax.inject', version: '1'
+   openEjbEmbeddedHibernateTestRuntime(group: 'org.hibernate', name: 'hibernate-entitymanager', version: '3.4.0.GA') {
+      exclude group: 'javax.persistence', name: 'persistence-api'
+      exclude group: 'javax.transaction', name: 'jta'
+   }
+   openEjbEmbeddedHibernateTestRuntime group: 'org.slf4j', name: 'slf4j-jdk14', version: libraryVersions.slf4j
+
+   openEjbEmbeddedEclipselinkTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-openejb-embedded-3.1', version: libraryVersions.arquillian
+   openEjbEmbeddedEclipselinkTestRuntime(group: 'org.apache.openejb', name: 'openejb-core', version: libraryVersions.openejb) {
+      exclude group: 'org.apache.openjpa', name: 'openjpa'
+   }
+   openEjbEmbeddedEclipselinkTestRuntime group: 'javax.inject', name: 'javax.inject', version: '1'
+   openEjbEmbeddedEclipselinkTestRuntime group: 'org.eclipse.persistence', name: 'eclipselink', version: '1.1.2'
+}
+
+sourceSets {
+   main {
+      compileClasspath = configurations.compile + configurations.compileOnly
+   }
+   test {
+      compileClasspath = compileClasspath + configurations.compileOnly
+      resources {
+         srcDir 'src/test/resources'
+         srcDir 'src/test/resources-openejb-embedded-shared'
+      }
+   }
+}
+
+task openEjbEmbeddedOpenjpaTest(type: Test)
+
+task openEjbEmbeddedHibernateTest(type: Test)
+
+task openEjbEmbeddedEclipselinkTest(type: Test)
+
+tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
+   t.testClassesDir = sourceSets.test.classesDir
+   t.classpath = sourceSets.test.classes + sourceSets.main.classes + configurations[t.name + 'Runtime']
+   t.classpath += files('src/test/resources-openejb-embedded-' + t.name.replace('openEjbEmbedded', '').replace('Test', '').toLowerCase())
+}
+
+test {
+  dependsOn { openEjbEmbeddedOpenjpaTest }
+  setEnabled(false)
+}
+
+task generateWrapper(type: Wrapper) {
+   gradleVersion = '0.9-rc-1'
+   jarPath = 'gradle-wrapper'
+}
