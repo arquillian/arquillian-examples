@@ -14,6 +14,7 @@
    <properties>
       <version.arquillian>1.0.0.Alpha4</version.arquillian>
       <version.jetty>8.0.0.M0</version.jetty>
+      <version.tomcat>6.0.29</version.tomcat>
       <version.weld-servlet>1.1.0.Beta1</version.weld-servlet>
    </properties>
 
@@ -37,11 +38,18 @@
          <artifactId>weld-servlet</artifactId>
          <version>${version.weld-servlet}</version>
       </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-validator</artifactId>
+         <version>4.0.0.GA</version>
+         <scope>test</scope>
+      </dependency>
       <!-- FIXME Java APIs should be grouped by container profile -->
       <dependency>
          <groupId>javax.servlet.jsp</groupId>
          <artifactId>jsp-api</artifactId>
          <version>2.2</version>
+         <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>com.sun.faces</groupId>
@@ -92,6 +100,7 @@
                <scope>test</scope>
             </dependency>
             <!-- TODO create a profile for the two JSF impls -->
+            <!--
             <dependency>
                <groupId>org.apache.myfaces.core</groupId>
                <artifactId>myfaces-impl</artifactId>
@@ -102,6 +111,58 @@
                <groupId>org.apache.myfaces.core</groupId>
                <artifactId>myfaces-api</artifactId>
                <version>2.0.2</version>
+               <scope>test</scope>
+            </dependency>
+            -->
+            <dependency>
+               <groupId>com.sun.faces</groupId>
+               <artifactId>jsf-impl</artifactId>
+               <version>2.0.3</version>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.glassfish.web</groupId>
+               <artifactId>el-impl</artifactId>
+               <version>2.2</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+               <testResource>
+                  <directory>src/test/resources-jetty</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+      <profile>
+         <id>arq-tomcat-embedded</id>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.arquillian.container</groupId>
+               <artifactId>arquillian-tomcat-embedded-6</artifactId>
+               <version>${version.arquillian}</version>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.tomcat</groupId>
+               <artifactId>catalina</artifactId>
+               <version>${version.tomcat}</version>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.tomcat</groupId>
+               <artifactId>coyote</artifactId>
+               <version>${version.tomcat}</version>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.tomcat</groupId>
+               <artifactId>jasper</artifactId>
+               <version>${version.tomcat}</version>
                <scope>test</scope>
             </dependency>
             <dependency>
@@ -116,12 +177,6 @@
                <version>2.2</version>
                <scope>test</scope>
             </dependency>
-            <dependency>
-               <groupId>org.hibernate</groupId>
-               <artifactId>hibernate-validator</artifactId>
-               <version>4.0.0.GA</version>
-               <scope>test</scope>
-            </dependency>
          </dependencies>
          <build>
             <testResources>
@@ -129,7 +184,7 @@
                   <directory>src/test/resources</directory>
                </testResource>
                <testResource>
-                  <directory>src/test/resources-jetty</directory>
+                  <directory>src/test/resources-tomcat</directory>
                </testResource>
             </testResources>
          </build>
