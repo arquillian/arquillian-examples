@@ -13,7 +13,7 @@
 
    <properties>
       <version.arquillian>1.0.0.Alpha4</version.arquillian>
-      <version.jetty>8.0.0.M0</version.jetty>
+      <version.jetty>8.0.0.M1</version.jetty>
       <version.tomcat>6.0.29</version.tomcat>
       <version.weld-servlet>1.1.0.Beta1</version.weld-servlet>
    </properties>
