@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+   <head>
+      <title>Conference Summary</title>
+   </head>
+   <body>
+   <f:view>
+      <h1>Conference Summary</h1>
+      <p>
+         <strong><h:outputText id="title" value="#{conference.title}"/></strong>
+         <br/>
+         <h:outputText value="#{conference.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="EST"/></h:outputText>
+         -
+         <h:outputText value="#{conference.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="EST"/></h:outputText>
+         <br/>
+         <h:outputText value="#{conference.location}"/>
+      </p>
+   </f:view>
+   </body>
+</html>

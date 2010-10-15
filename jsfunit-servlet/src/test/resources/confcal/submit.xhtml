@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+   <head>
+      <title>Submit Conference</title>
+   </head>
+   <body>
+   <f:view>
+      <h1>Submit Conference</h1>
+      <h:form id="conference">
+         Title: <h:inputText id="title" value="#{conference.title}"/>
+         <br/>
+         Start date: <h:inputText id="startDate" value="#{conference.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="EST"/></h:inputText>
+         <br/>
+         End date: <h:inputText id="endDate" value="#{conference.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="EST"/></h:inputText>
+         <br/>
+         Location: <h:inputText id="location" value="#{conference.location}"/>
+         <br/>
+         Topic: <h:inputText id="topic" value="#{conference.topic}"/>
+         <br/>
+         <h:commandButton id="submit" action="#{conferenceCalendar.submit(conference)}" value="Submit"/>
+      </h:form>
+   </f:view>
+   </body>
+</html>
