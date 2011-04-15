@@ -15,7 +15,7 @@
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-      <arquillian.version>1.0.0.Alpha4</arquillian.version>
+      <arquillian.version>1.0.0.Alpha5</arquillian.version>
    </properties>
 
    <repositories>
@@ -65,7 +65,7 @@
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
-         <version>4.8.1</version>
+         <version>4.8.2</version>
          <scope>test</scope>
       </dependency>
 
@@ -230,14 +230,14 @@
             <dependency>
                <groupId>org.jboss.jbossas</groupId>
                <artifactId>jboss-as-client</artifactId>
-               <version>6.0.0.20100721-M4</version>
+               <version>6.0.0.Final</version>
                <type>pom</type>
                <scope>provided</scope>
             </dependency>
             <dependency>
                <groupId>org.jboss.spec</groupId>
                <artifactId>jboss-javaee-6.0</artifactId>
-               <version>1.0.0.Beta7</version>
+               <version>1.0.0.Final</version>
                <type>pom</type>
                <scope>provided</scope>
             </dependency>

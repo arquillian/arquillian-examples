@@ -37,7 +37,7 @@
 		<jboss.domain>default</jboss.domain>
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
-		<arquillian.version>1.0.0.Alpha4</arquillian.version>
+		<arquillian.version>1.0.0.Alpha5</arquillian.version>
 	</properties>
 
 	<!-- repositories configured in settings.xml -->
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -262,7 +262,7 @@
 				<dependency>
 					<groupId>org.jboss.jbossas</groupId>
 					<artifactId>jboss-as-client</artifactId>
-					<version>6.0.0.20100429-M3</version>
+					<version>6.0.0.Final</version>
 					<type>pom</type>
 				</dependency>
 			</dependencies>

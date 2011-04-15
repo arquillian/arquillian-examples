@@ -15,7 +15,7 @@
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-      <arquillian.version>1.0.0.Alpha4</arquillian.version>
+      <arquillian.version>1.0.0.Alpha5</arquillian.version>
    </properties>
 
    <repositories>
@@ -56,7 +56,7 @@
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
-         <version>4.8.1</version>
+         <version>4.8.2</version>
       </dependency>
 
       <dependency>
@@ -265,7 +265,7 @@
             <dependency>
                <groupId>org.glassfish.extras</groupId>
                <artifactId>glassfish-embedded-all</artifactId>
-               <version>3.0.1</version>
+               <version>3.1-b41</version>
             </dependency>
             <!-- To use EclipseLink, comment out Hibernate EntityManager dependency below and
                  <provider> element in src/test/resources-glassfish-embedded/test-persistence.xml -->
