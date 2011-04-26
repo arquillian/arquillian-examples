@@ -12,7 +12,7 @@
    <description>Examples that demonstrate how to test JSF pages using Arquillian and JSFUnit in a Servlet environment</description>
 
    <properties>
-      <version.arquillian>1.0.0.Alpha4</version.arquillian>
+      <version.arquillian>1.0.0.Alpha5</version.arquillian>
       <version.jetty>8.0.0.M1</version.jetty>
       <version.tomcat>6.0.29</version.tomcat>
       <version.weld-servlet>1.1.0.Beta1</version.weld-servlet>
@@ -69,7 +69,7 @@
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
-         <version>4.8.1</version>
+         <version>4.8.2</version>
       </dependency>
    </dependencies>
 
