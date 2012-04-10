@@ -30,7 +30,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -40,23 +40,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class GamePersistenceTestCase
-{
+public class GamePersistenceTestCase {
    @Deployment
-   public static Archive<?> createDeployment()
-   {
+   public static Archive<?> createDeployment() {
       return ShrinkWrap.create(WebArchive.class, "test.war")
-            .addPackage(Game.class.getPackage())
-            .addManifestResource("test-persistence.xml", "persistence.xml")
-            .addWebResource(EmptyAsset.INSTANCE, "beans.xml");
+                       .addPackage(Game.class.getPackage())
+                       .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                       .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
    }
  
-   private static final String[] GAME_TITLES =
-   {
-      "Super Mario Brothers",
-      "Mario Kart",
-      "F-Zero"
-   };
+   private static final String[] GAME_TITLES = {"Super Mario Brothers",
+                                                "Mario Kart",
+                                                "F-Zero"
+                                               };
    
    private static final Object log = System.out;
 //   private static final Object log = null;
@@ -68,8 +64,7 @@ public class GamePersistenceTestCase
    @Inject
    UserTransaction utx;
 
-   public void insertSampleRecords() throws Exception
-   {
+   public void insertSampleRecords() throws Exception {
       utx.begin();
       em.joinTransaction();
     
@@ -87,17 +82,15 @@ public class GamePersistenceTestCase
    }
    
    @Test
-   public void should_be_able_to_select_games_using_jpql() throws Exception
-   {
+   public void should_be_able_to_select_games_using_jpql() throws Exception {
       insertSampleRecords();
       
       utx.begin();
       em.joinTransaction();
     
       printStatus("Selecting (using JPQL)...");
-      List<Game> games =
-         em.createQuery("select g from Game g order by g.id", Game.class)
-         .getResultList();
+      List<Game> games = em.createQuery("select g from Game g order by g.id", Game.class)
+                           .getResultList();
       printStatus("Found " + games.size() + " games (using JPQL)");
       assertEquals(GAME_TITLES.length, games.size());
     
@@ -110,8 +103,7 @@ public class GamePersistenceTestCase
    }
    
    @Test
-   public void should_be_able_to_select_games_using_criteria_api() throws Exception
-   {
+   public void should_be_able_to_select_games_using_criteria_api() throws Exception {
       insertSampleRecords();
       
       utx.begin();
@@ -140,14 +132,11 @@ public class GamePersistenceTestCase
       utx.commit();
    }
    
-   private void printStatus(Object message)
-   {
-      if (log instanceof PrintStream)
-      {
+   private void printStatus(Object message) {
+      if (log instanceof PrintStream) {
          ((PrintStream) log).println(message);
       }
-      else if (log instanceof Logger)
-      {
+      else if (log instanceof Logger) {
          ((Logger) log).info(message.toString());
       }
    }
