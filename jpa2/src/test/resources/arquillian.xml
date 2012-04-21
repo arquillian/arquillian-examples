@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<arquillian xmlns="http://jboss.com/arquillian"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:glassfish-embedded="urn:arq:org.jboss.arquillian.container.glassfish.embedded_3">
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-   <!-- Uncomment to have test archives exported to the file system for inspection -->
-   <!--
-   <engine>
-      <deploymentExportPath>target/</deploymentExportPath>
-   </engine>
-   -->
-
-   <glassfish-embedded:container>
-      <glassfish-embedded:sunResourcesXml>src/test/resources-glassfish-embedded/sun-resources.xml</glassfish-embedded:sunResourcesXml>
-   </glassfish-embedded:container>  
+    <container qualifier="glassfish-embedded" default="true">
+        <configuration>
+            <property name="resourcesXml">
+                src/test/resources-glassfish-embedded/glassfish-resources.xml
+            </property>
+        </configuration>
+    </container>
+    
+    <container qualifier="jbossas-managed">
+        <configuration>
+            <property name="javaVmArguments">-Xverify:none -XX:+UseFastAccessorMethods</property>
+        </configuration>
+    </container>
 
 </arquillian>
