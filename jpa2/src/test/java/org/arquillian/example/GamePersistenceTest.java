@@ -68,6 +68,7 @@ public class GamePersistenceTest {
     private void clearDatabase() throws Exception {
         utx.begin();
         em.joinTransaction();
+        System.out.println("Dumping old records...");
         em.createQuery("delete from Game").executeUpdate();
         utx.commit();
     }
@@ -75,6 +76,7 @@ public class GamePersistenceTest {
     private void insertData() throws Exception {
         utx.begin();
         em.joinTransaction();
+        System.out.println("Inserting records...");
         for (String title : GAME_TITLES) {
             Game game = new Game(title);
             em.persist(game);
@@ -102,7 +104,7 @@ public class GamePersistenceTest {
         List<Game> games = em.createQuery(fetchingAllGamesInJpql, Game.class).getResultList();
 
         // then
-        System.out.println("Found " + games.size() + " games (using JPQL)");
+        System.out.println("Found " + games.size() + " games (using JPQL):");
         assertContainsAllGames(games);
     }
     
@@ -122,7 +124,7 @@ public class GamePersistenceTest {
         List<Game> games = em.createQuery(criteria).getResultList();
 
         // then
-        System.out.println("Found " + games.size() + " games (using Criteria)");
+        System.out.println("Found " + games.size() + " games (using Criteria):");
         assertContainsAllGames(games);
     }
     
@@ -130,6 +132,7 @@ public class GamePersistenceTest {
         Assert.assertEquals(GAME_TITLES.length, retrievedGames.size());
         final Set<String> retrievedGameTitles = new HashSet<String>();
         for (Game game : retrievedGames) {
+            System.out.println("* " + game);
             retrievedGameTitles.add(game.getTitle());
         }
         Assert.assertTrue(retrievedGameTitles.containsAll(Arrays.asList(GAME_TITLES)));
