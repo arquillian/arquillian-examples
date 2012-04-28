@@ -95,18 +95,18 @@
                 <plugins>
                     <!-- The surefire plugin is configured to pass a system property to GlassFish to retarget the derby log file -->
                     <plugin>
-                       <groupId>org.apache.maven.plugins</groupId>
-                       <artifactId>maven-surefire-plugin</artifactId>
-                       <configuration>
-                          <systemPropertyVariables>
-                             <java.util.logging.config.file>
-                                 ${project.build.testOutputDirectory}/logging.properties
-                             </java.util.logging.config.file>
-                             <derby.stream.error.file>
-                                 ${project.build.directory}/derby.log
-                             </derby.stream.error.file>
-                          </systemPropertyVariables>
-                       </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <java.util.logging.config.file>
+                                    ${project.build.testOutputDirectory}/logging.properties
+                                </java.util.logging.config.file>
+                                <derby.stream.error.file>
+                                    ${project.build.directory}/derby.log
+                                </derby.stream.error.file>
+                            </systemPropertyVariables>
+                        </configuration>
                     </plugin>
                 </plugins>
                 <testResources>
