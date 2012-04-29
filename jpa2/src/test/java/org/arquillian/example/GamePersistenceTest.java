@@ -43,6 +43,7 @@ public class GamePersistenceTest {
             .addAsManifestResource("test-persistence.xml", "persistence.xml")
             .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         
+        // choose your packaging here
         return jar;
     }
  
@@ -60,12 +61,12 @@ public class GamePersistenceTest {
  
     @Before
     public void preparePersistenceTest() throws Exception {
-        clearDatabase();
+        clearData();
         insertData();
         startTransaction();
     }
 
-    private void clearDatabase() throws Exception {
+    private void clearData() throws Exception {
         utx.begin();
         em.joinTransaction();
         System.out.println("Dumping old records...");
@@ -82,6 +83,8 @@ public class GamePersistenceTest {
             em.persist(game);
         }
         utx.commit();
+        // reset the persistence context (cache)
+        em.clear();
     }
 
     private void startTransaction() throws Exception {

@@ -34,8 +34,8 @@ public class Game implements Serializable {
         return title;
     }
  
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
  
     @Override
