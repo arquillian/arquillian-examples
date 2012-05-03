@@ -5,6 +5,10 @@
    <persistence-unit name="test">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>testDatabase</jta-data-source>
+      <!-- why is scanning not working w/ Hibernate EM 4? -->
+      <class>com.acme.jpa.model.Game</class>
+      <class>com.acme.jpa.model.LineItem</class>
+      <class>com.acme.jpa.model.Record</class>
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
          <property name="hibernate.show_sql" value="true"/>

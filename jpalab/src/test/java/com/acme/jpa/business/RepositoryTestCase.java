@@ -24,7 +24,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -33,11 +33,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.acme.jpa.business.EntityInitializer;
-import com.acme.jpa.business.JavaPersistenceHelper;
-import com.acme.jpa.business.JavaPersistenceHelperBean;
-import com.acme.jpa.business.Repository;
-import com.acme.jpa.business.RepositoryBean;
 import com.acme.jpa.model.LineItem;
 import com.acme.jpa.model.Record;
 
@@ -51,7 +46,7 @@ public class RepositoryTestCase
          .addClasses(Record.class, LineItem.class,
                JavaPersistenceHelper.class, JavaPersistenceHelperBean.class,
                Repository.class, RepositoryBean.class)
-         .addManifestResource("test-persistence.xml", "persistence.xml");
+         .addAsManifestResource("test-persistence.xml", "persistence.xml");
    }
 
    @EJB
