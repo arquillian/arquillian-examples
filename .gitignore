@@ -3,4 +3,5 @@
 .gradle/
 .project
 .settings/
+derby.log
 target/
