@@ -35,12 +35,14 @@ public class GamePersistenceTest {
         WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Game.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+            .addAsWebInfResource("jbossas-ds.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
         // or jar packaging...
         JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
             .addPackage(Game.class.getPackage())
             .addAsManifestResource("test-persistence.xml", "persistence.xml")
+            .addAsManifestResource("jbossas-ds.xml")
             .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         
         // choose your packaging here
@@ -119,6 +121,8 @@ public class GamePersistenceTest {
                 
         Root<Game> game = criteria.from(Game.class);
         criteria.select(game);
+        // TIP: If you don't want to use the JPA 2 Metamodel,
+        // you can change the get() method call to get("id")
         criteria.orderBy(builder.asc(game.get(Game_.id)));
         // No WHERE clause, which implies select all
 
