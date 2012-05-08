@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    <!--
+    <engine>
+        <property name="deploymentExportPath">target/deployments</property>
+    </engine>
+    -->
+
+    <container qualifier="jbossas-managed" default="true">
+        <configuration>
+            <!-- If you want to use an existing JBoss AS installation, change the value of this property to that path -->
+            <!-- If you've already set the JBOSS_HOME environment variable, you can remove this configuration block -->
+            <property name="jbossHome">target/jboss-as-7.1.1.Final</property>
+            <property name="javaVmArguments">-Xmx512m -XX:MaxPermSize=128m -Xverify:none -XX:+UseFastAccessorMethods</property>
+            <!-- Use these javaVmArguments instead to wait for the debugger to connect -->
+            <!--
+            <property name="javaVmArguments">-Xmx512m -XX:MaxPermSize=128m -Xverify:none -XX:+UseFastAccessorMethods
+                -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=y
+            </property>
+            -->
+            <property name="outputToConsole">true</property>
+        </configuration>
+    </container>
+
+</arquillian>
