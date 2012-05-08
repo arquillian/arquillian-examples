@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h:messages/>
+        <h:panelGroup rendered="#{loginController.loggedIn}">
+            <p>You are signed in as #{currentUser.username}.</p>
+        </h:panelGroup>
+    </body>
+</html>
