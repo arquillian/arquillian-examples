@@ -26,6 +26,10 @@ This project is a follow-up to the arquillian-tutorial project. It demonstrates 
 
 This project contains a JPA 2 integration test that runs against Embedded GlassFish 3.1 (default), Remote GlassFish 3.1, Managed JBoss AS 7.1 and Remote JBoss AS 7.1.
 
+### [arquillian-drone-tutorial](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-drone-tutorial)
+
+This project demonstrates the use of Arquillian Drone to drive a Selenium test. It runs against Embedded GlassFish 3.1 (default), Managed JBoss AS 7.1 and Remote JBoss AS 7.1.
+
 ### ejb31-gfembedded
 
 This project contains EJB3.1 integration test and runs against Glassfish Embedded 3 container. The projects target is to provide simplest possible setup for this test combination.
