@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>arquillian-tutorial</name>
-    <url>http://arquillian.org</url>
+    <url>http://arquillian.org/guides/getting_started/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
