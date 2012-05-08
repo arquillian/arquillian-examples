@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<!-- Model Information -->
-	<modelVersion>4.0.0</modelVersion>
-	
-	<!-- Artifact Information  -->
-    <groupId>org.jboss.arquillian.examples</groupId>
-	<artifactId>parent</artifactId>
-	<packaging>pom</packaging>
-	<name>Arquillian Examples Aggregator</name>
-	<version>1.0.0-SNAPSHOT</version>
-	<description>Arquillian Examples Aggregator</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0
+        http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>org.arquillian.example</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<!-- Aggregate Modules -->
-	<modules>
-		<module>quickstart</module>
-		<module>ejb31-gfembedded</module>
-		<module>ejb31-jbembedded</module>
-		<module>ejb3-openejb</module>
-	</modules>
+    <name>Arquillian Examples Runner</name>
+    <description>A parent project for running all the example projects together</description>
+    <url>https://github.com/arquillian/arquillian-examples</url>
+
+    <modules>
+        <module>arquillian-tutorial</module>
+        <module>arquillian-tutorial-rinse-repeat</module>
+        <module>arquillian-persistence-tutorial</module>
+        <module>quickstart</module>
+        <module>ejb31-gfembedded</module>
+        <module>ejb31-jbembedded</module>
+        <module>ejb3-openejb</module>
+    </modules>
 
 </project>
