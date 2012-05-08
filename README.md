@@ -14,15 +14,15 @@ Find at more at http://arquillian.org
 
 Below is an index of the projects in this repository paired with a brief description.
 
-### arquillian-tutorial
+### [arquillian-tutorial](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-tutorial)
 
 This project is a starting point for using Arquillian. It has a simple CDI test case that runs against Weld EE Embedded (default), Embedded GlassFish 3.1 (default) and Managed JBoss AS 7.1.
 
-### arquillian-tutorial-rinse-repeat
+### [arquillian-tutorial-rinse-repeat](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-tutorial-rinse-repeat)
 
 This project is a follow-up to the arquillian-tutorial project. It demonstrates the integration of CDI and EJB with a test case that runs against GlassFish Embedded 3.1 (default), Remote JBoss AS 7.1, Remote GlassFish 3.1 and Managed JBoss AS 7.1.
 
-### arquillian-persistence-tutorial
+### [arquillian-persistence-tutorial](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-persistence-tutorial)
 
 This project contains a JPA 2 integration test that runs against Embedded GlassFish 3.1 (default), Remote GlassFish 3.1, Managed JBoss AS 7.1 and Remote JBoss AS 7.1.
 
