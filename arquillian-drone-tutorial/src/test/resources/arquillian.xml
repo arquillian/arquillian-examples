@@ -14,11 +14,11 @@
             <property name="outputToConsole">true</property>
         </configuration>
     </container>
-
-    <!--
+    
+    <!-- 
     <extension qualifier="selenium">
         <property name="browser">*googlechrome</property>
-        <property name="url">http://localhost:8181</property>
     </extension>
     -->
+    
 </arquillian>
