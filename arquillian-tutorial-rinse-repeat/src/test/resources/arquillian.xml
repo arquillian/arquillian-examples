@@ -11,6 +11,8 @@
     <defaultProtocol type="Servlet 3.0"/>
     -->
 
+    <!-- Uncomment the <engine> element to instruct Arquillian to write the archives for each test to the target location
+         on disk before deploying them to the server. -->
     <!--
     <engine>
         <property name="deploymentExportPath">target/deployments</property>
