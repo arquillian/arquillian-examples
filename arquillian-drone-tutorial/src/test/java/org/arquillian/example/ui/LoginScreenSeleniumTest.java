@@ -17,15 +17,18 @@
  */
 package org.arquillian.example.ui;
 
-import java.io.File;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Filters;
+import org.jboss.shrinkwrap.api.GenericArchive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +38,7 @@ import com.thoughtworks.selenium.DefaultSelenium;
 
 /**
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
+ * @author <a href="http://community.jboss.org/people/kpiwko">Karel Piwko</a>
  */
 @RunWith(Arquillian.class)
 public class LoginScreenSeleniumTest {
@@ -44,10 +48,15 @@ public class LoginScreenSeleniumTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "login.war")
             .addClasses(LoginController.class, User.class, Credentials.class)
-            .addAsWebResource(new File(WEBAPP_SRC, "login.xhtml"))
-            .addAsWebResource(new File(WEBAPP_SRC, "home.xhtml"))
+            // .addAsWebResource(new File(WEBAPP_SRC), "login.xhtml")
+            // .addAsWebResource(new File(WEBAPP_SRC), "home.xhtml")
+            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+                .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+                "/", Filters.include(".*\\.xhtml$"))
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-            .addAsWebInfResource(EmptyAsset.INSTANCE, "faces-config.xml");
+            .addAsWebInfResource(
+                new StringAsset("<faces-config version=\"2.0\"/>"),
+                "faces-config.xml");
     }
     
     @Drone
