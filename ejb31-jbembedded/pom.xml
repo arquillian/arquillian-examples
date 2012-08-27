@@ -4,9 +4,9 @@
 
     <!-- Parent -->
     <parent>
-        <groupId>org.jboss.arquillian.examples</groupId>
+        <groupId>org.arquillian.example</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -18,6 +18,21 @@
     <artifactId>ejb31-jbembedded</artifactId>
     <name>Arquillian Examples EJB3.1 JBoss AS 6 Embedded</name>
     <description>Simple Arquillian EJB3.1 JBoss AS 6 Embedded Project</description>
+
+    <build>
+        <pluginManagement>
+    <plugins>
+        <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+        </configuration>
+        </plugin>
+    </plugins>
+        </pluginManagement>
+    </build>
 
     <!-- Properties -->
     <properties>
@@ -77,6 +92,19 @@
     -->
     <dependencyManagement>
         <dependencies>
+
+            <!-- the jboass as depchain below brings in the wrong version of
+                 shrinkwrap so we override here -->
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-impl-base</artifactId>
+                <version>1.0.0-beta-3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-api</artifactId>
+                <version>1.0.0-beta-3</version>
+            </dependency>
 
             <!-- org.jboss.jbossas -->
             <dependency>
