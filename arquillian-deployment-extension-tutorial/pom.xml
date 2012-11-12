@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>org.arquillian.tutorial</groupId>
+   <artifactId>arquillian-deployment-extension-tutorial-parent</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   <name>Arquillian Tutoria: Deployment Extension</name>
+   <description>An example that demonstrates how to provide a custom deployment scenario in place of a @Deployment method via an Arquillian extension</description>
+
+   <modules>
+       <module>impl</module>
+       <module>integration-tests</module>
+       <module>functional-tests</module>
+   </modules>
+
+</project>
+
