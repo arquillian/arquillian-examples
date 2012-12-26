@@ -19,6 +19,7 @@
         <module>arquillian-tutorial</module>
         <module>arquillian-tutorial-rinse-repeat</module>
         <module>arquillian-persistence-tutorial</module>
+        <module>arquillian-jpa-drone</module>
         <module>quickstart</module>
         <module>ejb31-gfembedded</module>
         <module>ejb31-jbembedded</module>

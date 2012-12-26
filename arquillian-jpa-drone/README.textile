@@ -1,0 +1,7 @@
+h2. Arquillian JPA + Drone functional testing
+
+This example covers JPA testing with Selenium testing. It is the enhanced fusion of the following tutorials:
+
+http://arquillian.org/guides/testing_java_persistence/
+
+http://arquillian.org/guides/functional_testing_using_drone/

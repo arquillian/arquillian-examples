@@ -8,7 +8,7 @@
    <artifactId>arquillian-deployment-extension-tutorial-parent</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>pom</packaging>
-   <name>Arquillian Tutoria: Deployment Extension</name>
+   <name>Arquillian Tutorial: Deployment Extension</name>
    <description>An example that demonstrates how to provide a custom deployment scenario in place of a @Deployment method via an Arquillian extension</description>
 
    <modules>
