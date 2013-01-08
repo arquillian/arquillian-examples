@@ -39,20 +39,36 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.thoughtworks.selenium.DefaultSelenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author <a href="https://community.jboss.org/people/smikloso">Stefan Miklosovic</a>
  */
 @RunWith(Arquillian.class)
-public class JPASeleniumTest {
+public class JPAWebDriverTest {
 	
 	private static final String WEBAPP_SRC = "src/main/webapp";
+	
+	private static final By REGISTER_USERNAME_FIELD = By.id("registerForm:username");
+	
+    private static final By REGISTER_PASSWORD_FIELD = By.id("registerForm:password");
+    
+    private static final By REGISTER_BUTTON = By.id("registerForm:register");
+    
+    private static final By LOGIN_USERNAME_FIELD = By.id("loginForm:username");
+    
+    private static final By LOGIN_PASSWORD_FIELD = By.id("loginForm:password");
+    
+    private static final By LOGIN_TEXT = By.xpath("//h3[contains(text(), 'Log in')]");
+
+    private static final By LOGIN_BUTTON = By.id("loginForm:login");
 	
 	private static final String USERNAME = "JohnDoe";
 	
 	private static final String PASSWORD = "PASSWORD";
+
+    private static final By WELCOME = By.xpath("//p[contains(text(), 'You are signed in as " + USERNAME + ".')]");
 	
 	@Deployment(testable = false)
 	public static WebArchive createDeployment() {
@@ -77,33 +93,34 @@ public class JPASeleniumTest {
 	}
 	
 	@Drone
-	DefaultSelenium browser;
+	WebDriver driver;
 	
 	@ArquillianResource
 	URL deploymentUrl;
 	
 	@Test
 	public void register() {
-		// Register
-		browser.open(deploymentUrl + "register.jsf");
-		browser.waitForPageToLoad("15000");
-		browser.type("id=registerForm:username", USERNAME);
-		browser.type("id=registerForm:password", PASSWORD);
-		browser.click("id=registerForm:register");
-		browser.waitForPageToLoad("15000");
-		Assert.assertTrue(browser.isTextPresent("Log in"));
-		
-		// And try to log in
-		Assert.assertTrue("User should be registered and redirected to login page!",
-				browser.isElementPresent("id=loginForm:username"));
-		Assert.assertTrue("User should be registered and redirected to login page!",
-				browser.isElementPresent("id=loginForm:password"));
-		
-		browser.type("id=loginForm:username", USERNAME);
-		browser.type("id=loginForm:password", PASSWORD);
-		browser.click("id=loginForm:login");
-		browser.waitForPageToLoad("15000");
-		Assert.assertTrue("User should be at welcome page!",
-				browser.isTextPresent("You are signed in as " + USERNAME));
+	    // Register
+	    driver.get(deploymentUrl + "register.jsf");
+	    driver.findElement(REGISTER_USERNAME_FIELD).sendKeys(USERNAME);
+	    driver.findElement(REGISTER_PASSWORD_FIELD).sendKeys(PASSWORD);
+	    driver.findElement(REGISTER_BUTTON).click();
+	    
+	    Assert.assertTrue(driver.findElement(LOGIN_TEXT).isDisplayed());
+	    
+	    // And try to log in
+	    Assert.assertTrue("User should be registered and redirected to login page!"
+	            , driver.findElement(LOGIN_USERNAME_FIELD).isDisplayed()
+	            && driver.findElement(LOGIN_PASSWORD_FIELD).isDisplayed());
+	    
+	    driver.findElement(LOGIN_USERNAME_FIELD).clear();
+	    driver.findElement(LOGIN_USERNAME_FIELD).sendKeys(USERNAME);
+	    driver.findElement(LOGIN_PASSWORD_FIELD).clear();
+	    driver.findElement(LOGIN_PASSWORD_FIELD).sendKeys(PASSWORD);
+	    driver.findElement(LOGIN_BUTTON).click();
+	    
+	    Assert.assertTrue("User should be at welcome page!",
+	            driver.findElement(WELCOME).isDisplayed());
 	}
+	
 }
