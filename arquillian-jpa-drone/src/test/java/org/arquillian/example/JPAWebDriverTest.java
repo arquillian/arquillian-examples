@@ -31,6 +31,7 @@ import org.arquillian.example.model.User;
 import org.arquillian.example.security.Authenticator;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -39,88 +40,101 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @author <a href="https://community.jboss.org/people/smikloso">Stefan Miklosovic</a>
  */
 @RunWith(Arquillian.class)
 public class JPAWebDriverTest {
-	
-	private static final String WEBAPP_SRC = "src/main/webapp";
-	
-	private static final By REGISTER_USERNAME_FIELD = By.id("registerForm:username");
-	
-    private static final By REGISTER_PASSWORD_FIELD = By.id("registerForm:password");
-    
-    private static final By REGISTER_BUTTON = By.id("registerForm:register");
-    
-    private static final By LOGIN_USERNAME_FIELD = By.id("loginForm:username");
-    
-    private static final By LOGIN_PASSWORD_FIELD = By.id("loginForm:password");
-    
-    private static final By LOGIN_TEXT = By.xpath("//h3[contains(text(), 'Log in')]");
 
-    private static final By LOGIN_BUTTON = By.id("loginForm:login");
-	
-	private static final String USERNAME = "JohnDoe";
-	
-	private static final String PASSWORD = "PASSWORD";
+    private static final String WEBAPP_SRC = "src/main/webapp";
 
-    private static final By WELCOME = By.xpath("//p[contains(text(), 'You are signed in as " + USERNAME + ".')]");
-	
-	@Deployment(testable = false)
-	public static WebArchive createDeployment() {
-		return ShrinkWrap.create(WebArchive.class, "login.war")
-				.addClasses(User.class,
-						UserDAO.class,
-						UserDAOImpl.class,
-						UserDAOException.class,
-						Authenticator.class, 
-						Credentials.class,
-						LoginController.class, 
-						RegisterController.class)
-				.addAsResource("test-persistence.xml", "META-INF/persistence.xml")
-				.addAsWebInfResource("jbossas-ds.xml")				
-				.addAsWebResource(new File(WEBAPP_SRC, "login.xhtml"))
-				.addAsWebResource(new File(WEBAPP_SRC, "home.xhtml"))
-				.addAsWebResource(new File(WEBAPP_SRC, "register.xhtml"))
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource(
-						new StringAsset("<faces-config version=\"2.0\"/>"),
-						"faces-config.xml");
-	}
-	
-	@Drone
-	WebDriver driver;
-	
-	@ArquillianResource
-	URL deploymentUrl;
-	
-	@Test
-	public void register() {
-	    // Register
-	    driver.get(deploymentUrl + "register.jsf");
-	    driver.findElement(REGISTER_USERNAME_FIELD).sendKeys(USERNAME);
-	    driver.findElement(REGISTER_PASSWORD_FIELD).sendKeys(PASSWORD);
-	    driver.findElement(REGISTER_BUTTON).click();
-	    
-	    Assert.assertTrue(driver.findElement(LOGIN_TEXT).isDisplayed());
-	    
-	    // And try to log in
-	    Assert.assertTrue("User should be registered and redirected to login page!"
-	            , driver.findElement(LOGIN_USERNAME_FIELD).isDisplayed()
-	            && driver.findElement(LOGIN_PASSWORD_FIELD).isDisplayed());
-	    
-	    driver.findElement(LOGIN_USERNAME_FIELD).clear();
-	    driver.findElement(LOGIN_USERNAME_FIELD).sendKeys(USERNAME);
-	    driver.findElement(LOGIN_PASSWORD_FIELD).clear();
-	    driver.findElement(LOGIN_PASSWORD_FIELD).sendKeys(PASSWORD);
-	    driver.findElement(LOGIN_BUTTON).click();
-	    
-	    Assert.assertTrue("User should be at welcome page!",
-	            driver.findElement(WELCOME).isDisplayed());
-	}
-	
+    private static final String USERNAME = "JohnDoe";
+
+    private static final String PASSWORD = "PASSWORD";
+
+    @FindBy(id = "registerForm:username")
+    WebElement registerUserNameField;
+
+    @FindBy(id = "registerForm:password")
+    WebElement registerPasswordField;
+
+    @FindBy(id = "registerForm:register")
+    WebElement submitRegistration;
+
+    @FindBy(id = "loginForm:username")
+    WebElement loginUserNameField;
+
+    @FindBy(id = "loginForm:password")
+    WebElement loginPasswordField;
+
+    // TODO: replace with css selectors
+    @FindBy(xpath = "//h3[contains(text(), 'Log in')]")
+    WebElement loginHeader;
+
+    @FindBy(id = "loginForm:login")
+    WebElement submitLogin;
+
+    // TODO: replace with css selectors
+    @FindBy(xpath = "//p[contains(text(), 'You are signed in as " + USERNAME + ".')]")
+    WebElement welcomeMessage;
+
+    @Deployment(testable = false)
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class, "login.war")
+                .addClasses(User.class,
+                        UserDAO.class,
+                        UserDAOImpl.class,
+                        UserDAOException.class,
+                        Authenticator.class,
+                        Credentials.class,
+                        LoginController.class,
+                        RegisterController.class)
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource("jbossas-ds.xml")
+                .addAsWebResource(new File(WEBAPP_SRC, "login.xhtml"))
+                .addAsWebResource(new File(WEBAPP_SRC, "home.xhtml"))
+                .addAsWebResource(new File(WEBAPP_SRC, "register.xhtml"))
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsWebInfResource(
+                        new StringAsset("<faces-config version=\"2.0\"/>"),
+                        "faces-config.xml");
+    }
+
+    @Drone
+    WebDriver driver;
+
+    @ArquillianResource
+    URL deploymentUrl;
+
+    @Test
+    public void register() {
+        // Register
+        driver.get(deploymentUrl + "register.jsf");
+        registerUserNameField.sendKeys(USERNAME);
+        registerPasswordField.sendKeys(PASSWORD);
+
+        // ensure that HTTP request is fired and wait for the response to be delivered
+        Graphene.guardHttp(submitRegistration).click();
+
+        Assert.assertTrue(loginHeader.isDisplayed());
+
+        // And try to log in
+        Assert.assertTrue("User should be registered and redirected to login page!"
+                , loginUserNameField.isDisplayed()
+                        && loginPasswordField.isDisplayed());
+
+        loginUserNameField.clear();
+        loginUserNameField.sendKeys(USERNAME);
+        loginPasswordField.clear();
+        loginPasswordField.sendKeys(PASSWORD);
+
+        // ensure that HTTP request is fired and wait for the response to be delivered
+        Graphene.guardHttp(submitLogin).click();
+
+        Assert.assertTrue("User should be at welcome page!", welcomeMessage.isDisplayed());
+    }
 }
