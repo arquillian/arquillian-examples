@@ -17,10 +17,11 @@
 package com.acme.jpa;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import javax.ejb.EJB;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -36,7 +37,7 @@ public class TwoPhaseCommitTestCase
    {
       return ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Game.class.getPackage())
-            .addManifestResource("test-persistence.xml", "persistence.xml");
+            .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
    }
  
    @EJB
@@ -55,6 +56,7 @@ public class TwoPhaseCommitTestCase
       try
       {
          service.succeedFirstFailSecondInTx();
+         fail();
       }
       catch (Exception e)
       {
@@ -72,6 +74,7 @@ public class TwoPhaseCommitTestCase
       try
       {
          service.succeedFirstFailSecondWithoutTx();
+         fail();
       }
       catch (Exception e)
       {
