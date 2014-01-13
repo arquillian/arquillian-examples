@@ -6,9 +6,9 @@
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.arquillian.example</groupId>
+    <groupId>org.jboss.arquillian.examples</groupId>
     <artifactId>arquillian-tutorial-rinse-repeat</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>arquillian-tutorial</name>
