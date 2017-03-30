@@ -1,7 +1,41 @@
-.classpath
-.factorypath
-.gradle/
+# Eclipse
 .project
+.classpath
 .settings/
-derby.log
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Gradle
+.gradle/
+.ivy/
+
+# Maven
 target/
+pom.xml.versionsBackup
+pom.xml.releaseBackup
+release.properties
+dependency-reduced-pom.xml
+
+# TestNG
+test-output/
+
+# JBoss AS
+transaction.log
+
+# Infinitest configuration
+infinitest.filters
+
+# Logs
+*.log
+*.log~
+
+# Libreoffice leftovers (XLS)
+.~lock*
+
+atlassian-ide-plugin.xml
+.autoenv.zsh
+gh-pages
