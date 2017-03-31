@@ -223,6 +223,14 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemProperties>
+                                <arquillian.launch>jbossas-managed</arquillian.launch>
+                            </systemProperties>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
