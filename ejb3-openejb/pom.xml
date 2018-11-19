@@ -21,7 +21,7 @@
     <!-- Properties -->
     <properties>
         <version.junit>4.8.2</version.junit>
-        <version.org.jboss.arquillian>1.0.0.Alpha5</version.org.jboss.arquillian>
+        <version.org.jboss.arquillian>1.0.0.Alpha4</version.org.jboss.arquillian>
         <version.org.apache.openejb_openejb.core>3.1.2</version.org.apache.openejb_openejb.core>
         <version.org.jboss.ejb3>3.1.4</version.org.jboss.ejb3>
         <version.javax.enterprise.cdi>1.0-SP4</version.javax.enterprise.cdi>
