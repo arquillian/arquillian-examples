@@ -26,7 +26,7 @@
         <version.org.jboss.arquillian>1.0.0.Alpha5</version.org.jboss.arquillian>
 
         <!-- The target version of AS to be used -->
-        <version.org.jboss.jbossas>6.0.0.Final</version.org.jboss.jbossas>
+        <version.org.jboss.jbossas>6.1.0.Final</version.org.jboss.jbossas>
 
         <!-- JBOSS_HOME (We'll unpack into here -->
         <JBOSS_HOME>${project.build.directory}/jboss-${version.org.jboss.jbossas}</JBOSS_HOME>
