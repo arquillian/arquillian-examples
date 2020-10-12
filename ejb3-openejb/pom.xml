@@ -20,7 +20,7 @@
 
     <!-- Properties -->
     <properties>
-        <version.junit>4.8.2</version.junit>
+        <version.junit>4.13.1</version.junit>
         <version.org.jboss.arquillian>1.0.0.Alpha5</version.org.jboss.arquillian>
         <version.org.apache.openejb_openejb.core>3.1.2</version.org.apache.openejb_openejb.core>
         <version.org.jboss.ejb3>3.1.4</version.org.jboss.ejb3>
