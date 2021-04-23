@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.0.GA</version>
+			<version>5.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- JSF -->
