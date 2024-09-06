@@ -37,7 +37,7 @@ public class SingletonOrderRepository implements OrderRepository {
     @Override
     @Lock(LockType.WRITE)
     public void addOrder(List<String> order) {
-        orders.add(order);
+        orders.add(new ArrayList<String>(order));
     }
     
     @Override

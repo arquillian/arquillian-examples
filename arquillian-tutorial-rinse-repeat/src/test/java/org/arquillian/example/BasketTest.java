@@ -30,6 +30,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+
 /**
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
@@ -68,5 +72,6 @@ public class BasketTest {
     @InSequence(2)
     public void order_should_be_persistent() {
         Assert.assertEquals(2, repo.getOrderCount());
+        Assert.assertThat("First order must have sunglasses on its 1. position","sunglasses", is(repo.getOrders().get(0).get(0)));
     }
 }
