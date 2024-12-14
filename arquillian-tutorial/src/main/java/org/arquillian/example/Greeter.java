@@ -18,11 +18,15 @@
 package org.arquillian.example;
 
 import java.io.PrintStream;
-import javax.inject.Inject;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 /**
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
+@Dependent
 public class Greeter {
 
     private PhraseBuilder phraseBuilder;

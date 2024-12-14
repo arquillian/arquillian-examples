@@ -16,7 +16,10 @@ Below is an index of the projects in this repository paired with a brief descrip
 
 ### [arquillian-tutorial](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-tutorial)
 
-This project is a starting point for using Arquillian. It has a simple CDI test case that runs against Weld EE Embedded (default), Embedded GlassFish 3.1 (default) and Managed JBoss AS 7.1.
+This project is a starting point for using Arquillian. It has a simple CDI test case that runs against Weld EE Embedded (default), Managed Wildfly 34.x, and Embedded GlassFish 3.1 (out of date).
+
+`mvn test` will run the test against Weld EE Embedded.
+`mvn test -Parquillian-wildfly-managed` will run the test against the latest Wildfly version.
 
 ### [arquillian-tutorial-rinse-repeat](https://github.com/arquillian/arquillian-examples/tree/master/arquillian-tutorial-rinse-repeat)
 

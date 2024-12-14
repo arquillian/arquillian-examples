@@ -20,11 +20,14 @@ package org.arquillian.example;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 
 /**
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
+@Dependent
 public class PhraseBuilder {
     private Map<String, String> templates;
 
